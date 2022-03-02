@@ -25,6 +25,16 @@ export default function getDataPokemonAndPrintLS() {
       el.dataset.name = data.name;
     });
 
+    if (data.types.length === 2) {
+      $template.querySelector(
+        ".text-card"
+      ).textContent = `Type: ${data.types[0].type.name}, ${data.types[1].type.name}`;
+    } else {
+      $template.querySelector(
+        ".text-card"
+      ).textContent = `Type: ${data.types[0].type.name}`;
+    }
+
     if (!(ls.getItem("myFavs") === null)) {
       let findIndex = myFavsLS.findIndex((el) => el === data.name);
 
@@ -38,16 +48,6 @@ export default function getDataPokemonAndPrintLS() {
         $template.querySelector(".btn-add-favs").classList.remove("btn-oculto");
         $template.querySelector(".btn-remove-favs").classList.add("btn-oculto");
       }
-    }
-
-    if (data.types.length === 2) {
-      $template.querySelector(
-        ".text-card"
-      ).textContent = `Type: ${data.types[0].type.name}, ${data.types[1].type.name}`;
-    } else {
-      $template.querySelector(
-        ".text-card"
-      ).textContent = `Type: ${data.types[0].type.name}`;
     }
 
     let $clone = d.importNode($template, true);
