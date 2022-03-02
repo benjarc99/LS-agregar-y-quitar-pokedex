@@ -6,7 +6,10 @@ export default function favoritesLS(btnAddFavs, btnRmFavs) {
 
   d.addEventListener("click", (e) => {
     if (e.target.matches(btnAddFavs)) {
-      let dataLS = e.target.dataset.name;
+      let dataLS = {
+        id: e.target.id,
+        name: e.target.dataset.name,
+      };
 
       if (ls.getItem("myFavs") === null) {
         arrayLS.push(dataLS);
@@ -26,9 +29,9 @@ export default function favoritesLS(btnAddFavs, btnRmFavs) {
       let myFavsLS = ls.getItem("myFavs");
       myFavsLS = JSON.parse(myFavsLS);
 
-      let dataLS = e.target.dataset.name;
-
-      let indexRemove = myFavsLS.findIndex((el) => el === dataLS);
+      let indexRemove = myFavsLS.findIndex(
+        (el) => (el.id === e.target.id) & (el.name === e.target.dataset.name)
+      );
       myFavsLS.splice(indexRemove, 1);
 
       ls.setItem("myFavs", JSON.stringify(myFavsLS));

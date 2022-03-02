@@ -12,6 +12,11 @@ export default function getDataPokemonAndPrintLS() {
     myFavsLS = JSON.parse(myFavsLS);
   }
 
+  // const idMyFavsLS = myFavsLS.map((el) => {
+  //   return [el.id];
+  // });
+  // console.log(idMyFavsLS);
+
   const printCardPokemon = (data) => {
     $template
       .querySelector(".img-card")
@@ -36,8 +41,9 @@ export default function getDataPokemonAndPrintLS() {
     }
 
     if (!(ls.getItem("myFavs") === null)) {
-      let findIndex = myFavsLS.findIndex((el) => el === data.name);
-
+      let findIndex = myFavsLS.findIndex(
+        (el) => (el.id == data.id) & (el.name === data.name)
+      );
       if (findIndex > -1) {
         $template.querySelector(".btn-add-favs").classList.add("btn-oculto");
         $template
